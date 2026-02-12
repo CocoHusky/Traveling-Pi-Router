@@ -2,9 +2,32 @@
 
 This repository installs a travel-router stack for Raspberry Pi that **only supports Qualcomm Atheros AR9271 USB Wi‑Fi adapters using `ath9k_htc`**.
 
+## Before you run `install.sh` (Pi setup)
+
+1. Use Raspberry Pi OS (Bookworm or older supported Debian-based Pi OS variants).
+2. Ensure internet is working on your Pi for package installation.
+3. Plug in the **Qualcomm Atheros AR9271** USB Wi‑Fi dongle.
+4. Install git if needed:
+   ```bash
+   sudo apt update
+   sudo apt install -y git
+   ```
+5. Clone this repo to a stable location on the Pi (recommended: `/opt/traveling-pi-router`):
+   ```bash
+   sudo mkdir -p /opt
+   cd /opt
+   sudo git clone <YOUR_GITHUB_REPO_URL> traveling-pi-router
+   cd /opt/traveling-pi-router
+   ```
+
+> You can run the installer from any folder, but `/opt/traveling-pi-router` is recommended so scripts stay in a predictable location for future updates.
+
 ## Quick install
 
+From the cloned repo directory:
+
 ```bash
+cd /opt/traveling-pi-router
 sudo ./install.sh
 ```
 
