@@ -1,0 +1,5 @@
+[Match]
+MACAddress=__AP_IFACE_MAC__
+
+[Link]
+Name=__LAN_IF__
