@@ -16,7 +16,7 @@ This repository installs a travel-router stack for Raspberry Pi that **only supp
    ```bash
    sudo mkdir -p /opt
    cd /opt
-   sudo git clone https://github.com/CocoHusky/Traveling-Pi-Router/ traveling-pi-router
+   sudo git clone https://github.com/CocoHusky/Traveling-Pi-Router.git traveling-pi-router
    cd /opt/traveling-pi-router
    ```
 
