@@ -99,8 +99,9 @@ Expected:
 ## Notes
 
 - Interface naming is done via systemd `.link` using your configured `AP_IFACE_MAC` (`/etc/systemd/network/10-travelrouter.link`), not udev `NAME=` rules.
-- If NetworkManager is installed, `LAN_IF` is marked unmanaged.
-- If dhcpcd is installed, `denyinterfaces LAN_IF` is set.
+- If NetworkManager is installed, installer/startup automatically mark `LAN_IF` unmanaged so hostapd can own AP mode.
+- If dhcpcd is installed, installer/startup enforce `denyinterfaces LAN_IF`.
+- Installer/startup automatically unmask and enable `hostapd` and `dnsmasq`.
 - The AP config uses `nl80211` and a **fixed channel (`channel=6`)**; AR9271/`ath9k_htc` can be quirky with ACS/auto-channel selection.
 - Scripts avoid logging your plaintext passphrase.
 

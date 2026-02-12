@@ -64,6 +64,26 @@ generate_configs() {
     "$DNSMASQ_TEMPLATE" > /etc/dnsmasq.conf
 }
 
+
+ensure_lan_unmanaged() {
+  if command -v nmcli >/dev/null 2>&1 && systemctl is-active --quiet NetworkManager; then
+    mkdir -p /etc/NetworkManager/conf.d
+    cat > /etc/NetworkManager/conf.d/10-travelrouter-unmanaged.conf <<EOFNM
+[keyfile]
+unmanaged-devices=interface-name:${LAN_IF}
+EOFNM
+    nmcli device set "$LAN_IF" managed no >/dev/null 2>&1 || true
+    systemctl restart NetworkManager || warn "Failed to restart NetworkManager"
+  fi
+
+  if [[ -f /etc/dhcpcd.conf ]]; then
+    if ! grep -q "^denyinterfaces ${LAN_IF}$" /etc/dhcpcd.conf; then
+      printf '\n%s\n' "denyinterfaces ${LAN_IF}" >> /etc/dhcpcd.conf
+    fi
+    systemctl restart dhcpcd >/dev/null 2>&1 || true
+  fi
+}
+
 setup_interface() {
   ip link set "$LAN_IF" up
 
@@ -107,6 +127,9 @@ setup_iptables() {
 }
 
 start_services() {
+  systemctl unmask hostapd 2>/dev/null || true
+  systemctl unmask dnsmasq 2>/dev/null || true
+  systemctl enable hostapd dnsmasq >/dev/null 2>&1 || true
   systemctl restart hostapd
   systemctl restart dnsmasq
 }
@@ -114,6 +137,7 @@ start_services() {
 main() {
   require_root
   validate_config
+  ensure_lan_unmanaged
   setup_interface
   generate_configs
   enable_forwarding

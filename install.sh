@@ -41,6 +41,12 @@ install_packages() {
   apt-get install -y hostapd dnsmasq iptables-persistent netfilter-persistent wireless-tools iw usbutils
 }
 
+prepare_services() {
+  systemctl unmask hostapd 2>/dev/null || true
+  systemctl unmask dnsmasq 2>/dev/null || true
+  systemctl enable hostapd dnsmasq >/dev/null 2>&1 || true
+}
+
 ensure_config() {
   mkdir -p "$CONFIG_DIR"
   if [[ ! -f "$CONFIG_FILE" ]]; then
@@ -149,6 +155,7 @@ main() {
   configure_networkmanager
   configure_dhcpcd
   install_files
+  prepare_services
 
   log "Install complete."
   echo
