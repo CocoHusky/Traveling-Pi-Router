@@ -6,7 +6,7 @@ This repository installs a travel-router stack for Raspberry Pi that **only supp
 
 1. Use Raspberry Pi OS (Bookworm or older supported Debian-based Pi OS variants).
 2. Ensure internet is working on your Pi for package installation.
-3. Plug in the **Qualcomm Atheros AR9271** USB Wi‑Fi dongle.
+3. Plug in the **Qualcomm Atheros AR9271** USB Wi‑Fi dongle. (https://www.amazon.com/dp/B0DW8VBF7P?&linkCode=ll2&tag=cococollab-20&linkId=907287b5f9f663770c4ae5ab5db0a799&language=en_US&ref_=as_li_ss_tl)
 4. Install git if needed:
    ```bash
    sudo apt update
