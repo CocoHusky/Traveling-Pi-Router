@@ -1,3 +1,10 @@
+# Purpose
+
+Many coffee/guest Wi-Fi networks require a portal login that a Tesla can’t complete reliably. With this setup:
+   1. Your Pi joins the Wi-Fi
+   2. You complete the portal login from your phone/laptop while connected to the Pi AP
+   3. Once authorized, the network usually whitelists the Pi’s WAN MAC, and your system (Tesla Car) gets internet through NAT.
+
 # Traveling Pi Router (AR9271 only)
 
 This repository installs a travel-router stack for Raspberry Pi that **only supports Qualcomm Atheros AR9271 USB Wi‑Fi adapters using `ath9k_htc`**.
