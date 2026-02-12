@@ -1,0 +1,7 @@
+interface=__LAN_IF__
+bind-interfaces
+dhcp-range=__DHCP_START__,__DHCP_END__,12h
+dhcp-option=option:router,__ROUTER_IP__
+dhcp-option=option:dns-server,1.1.1.1,8.8.8.8
+log-queries
+log-dhcp

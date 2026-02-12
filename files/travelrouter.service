@@ -1,0 +1,14 @@
+[Unit]
+Description=Travel Router orchestrator (AR9271 ath9k_htc only)
+After=network.target
+Wants=hostapd.service dnsmasq.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=/etc/travelrouter/config.env
+ExecStart=/usr/local/bin/travelrouter-start.sh
+ExecStop=/usr/local/bin/travelrouter-stop.sh
+
+[Install]
+WantedBy=multi-user.target
